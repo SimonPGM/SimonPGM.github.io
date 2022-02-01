@@ -1,56 +1,419 @@
-<h1 id="informe-técnico"><center>Informe Técnico</center></h1>
-<p>-Juan José Galeano Arenas<br/>
--Simón Pedro Galeano Muñoz<br/>
--Sebastian Gaviria Sánchez<br/>
--Verónica Ríos Vargas<br/></p>
-<h2 id="tabla-de-contenido">Tabla de contenido</h2>
-<ul>
-<li><a href="#disposici%C3%B3n-del-problema-">Disposición del problema <a name="introduccion"></a></a></li>
-<li><a href="#web-scraping-y-construcci%C3%B3n-de-la-base-de-datos-">Web Scraping y construcción de la base de datos <a name="basedatos"></a></a></li>
-<li><a href="#preprocesamiento-de-la-base-de-datos-">Preprocesamiento de la base de datos <a name="preprocesamiento"></a></a><ul>
-<li><a href="#depuraci%C3%B3n-">Depuración <a name="depuracion"></a></a></li>
-<li><a href="#adecuaci%C3%B3n-de-la-escala-y-color-">Adecuación de la escala y color <a name="escala"></a></a></li>
-</ul>
-</li>
-<li><a href="#componentes-principales-">Componentes principales <a name="pca"></a></a></li>
-<li><a href="#modelado-">Modelado <a name="modelado"></a></a><ul>
-<li><a href="#implementaci%C3%B3n-y-resultados-">Implementación y resultados <a name="construcción"></a></a></li>
-</ul>
-</li>
-<li><a href="#conclusiones-">Conclusiones <a name="conclusiones"></a></a></li>
-<li><a href="#referencias-si-las-hay-xd-">Referencias (si las hay xd) <a name="referencias"></a></a></li>
-</ul>
-<h2 id="disposición-del-problema-">Disposición del problema <a name="introduccion"></a></h2>
-<p>Resulta interesante y además de suma utilidad identificar características particulares en diferentes imágenes que se tengan a disposición. Sin embargo, esta tarea puede resultar altamente exhaustiva si se realiza a manos humanas. Así entonces, en este desarrollo se aborda el asunto de identificación de características particulares en fotos y con ello la clasificación de las mismas, pero haciendo uso de múltiples técnicas estadísticas para la automatización del proceso. </p>
-<p>Específicamente se desea clasificar imágenes de personas, las cuales serán categorizadas según si hacen uso o no de lentes de sol. Para esta causa, se debe proceder inicialmente con la construcción de una base de datos de un buen tamaño que permita la implementación de algún modelo apropiado para la tarea de clasificación. Continúa leyendo para adentrarte en los detalles de este proyecto. </p>
-<h2 id="web-scraping-y-construcción-de-la-base-de-datos-">Web Scraping y construcción de la base de datos <a name="basedatos"></a></h2>
-<p>Como se mencionó anteriormente, en un primer paso se debe proceder a construir una base de datos (suficientemente grande) para entrenar un modelo de clasificación que pueda identificar con un buen desempeño si una persona usa o no gafas de sol. Sin embargo, recopilar una cantidad de imágenes suficiente puede no ser muy práctico en términos de tiempo. </p>
-<p>Por esto, se decidió automatizar este proceso haciendo uso de Scrapy como backend para obtener imágenes a través de Splash.</p>
-<p>En un primer intento la página de <a href="https://www.freepik.es/">Freepik</a> sirvió como sitio contenedor de las imágenes, sin embargo, esta metodología resultó poco factible ya que se dificulta el control de las imágenes obtenidas a través de esta técnica de programación.</p>
-<p>Luego de esto se recopiló una base de datos encontrada en la plataforma <a href="kaggle.com">Kaggle</a> para posteriormente preprocesarla y ajustar diversos modelos con esta.</p>
-<p><img src="https://miro.medium.com/max/1024/1*nHfayfdmxAApbg84iMrJqQ.gif" alt="scrapi"></p>
-<h2 id="preprocesamiento-de-la-base-de-datos-">Preprocesamiento de la base de datos <a name="preprocesamiento"></a></h2>
-<p>Una vez obtenidas las imágenes con las cuales se va a entrenar el modelo de clasificación, gracias al método por el cuál fueron obtenidas, pudieran filtrarse algunas cuantas que no cumplan con los requisitos deseados para un correcto entrenamiento del modelo de clasificación. Además de esto, no todas las fotos se encuentran en la misma escala de pixeles, por lo cuál se debe depurar la base de datos y redimensionar las imágenes a un tamaño estándar de alto y ancho. </p>
-<h3 id="depuración-">Depuración <a name="depuracion"></a></h3>
-<p>Como se mencionó en el apartado anterior, se cuenta con dos carpetas, una que contiene las imágenes de personas que usan gafas de sol y otra en donde las imágenes son de personas sin estas. Así entonces, para depurar las imágenes que no cumplieran con alguno de estos dos requisitos respectivos, se realizó manualmente la tarea de revisar de forma exhaustiva cada una de estas dos carpetas, eliminar los elementos no deseados y de este modo conseguir un material de trabajo limpio y apropiado para los desarrollos posteriores. </p>
-<p>![tr]</p>
-<h3 id="adecuación-de-la-escala-y-color-">Adecuación de la escala y color <a name="escala"></a></h3>
-<p>Para estandarizar el tamaño de las imágenes se usó la librería de python OpenCV, específicamente el método &quot;resize&quot; con la cual se definió un tamaño de 32x30 pixeles para cada imágen en la base de datos.</p>
-<p>En un primer intento se intentó acudir a la librería Skimage con su método propio &quot;resize&quot;, para realizar esta tarea, sin embar, al intentar guardar la imágen el archivo se corrompía y se conseguía por resultado un fondo negro sin ningún tipo de información relevante.</p>
-<p>Por último, para terminar con la adecuación pertinente del material, se transformaron las imágenes de formato RGB a escala de grises con el fin de obtener un solo canal, el cual corresponde a la intensidad, y simplificar de este modo los procesos posteriores. </p>
-<h2 id="componentes-principales-">Componentes principales <a name="pca"></a></h2>
-<p>Con lo anterior se logró construir una base de datos extensa que comprendió 32 x 30 = 960 variables constituídas por la intensidad de pixeles en cada imágen. En total se obtuvieron 6313 observaciones (imágenes) en 960 variables. </p>
-<p>Una vez con el material adecuado a disposición, el proceso a seguir en este desarrollo fue apostar a una reducción de la dimensionalidad original de los datos usando la metodología de análisis de componentes principales (PCA).</p>
-<p>Sabiendo de antemano la teoría necesaria para llevar a cabo este método de aprendizaje no supervisado, se acudió a la clase PCA de la librería sklearn.decomposition, con la cual se construyó un wrapper que cumplió la función de aplicar esta metodología a los datos originales conservando únicamente las componentes principales que lograran explicar un porcentaje de variabilidad deseado por el usuario, en este caso del 90%.</p>
-<p>Finalmente, implementado el procedimiento anterior, se obtuvo un reducción de dimensionalidad sustancial conservando únicamente 155 componentes principales, es decir, un 16.14% de la información total para explicar mínimamente el 90% de la variabilidad total. </p>
-<p>Con esto, se llegó a una base de datos ideal para comenzar el proceso de modelación. </p>
-<h2 id="modelado-">Modelado <a name="modelado"></a></h2>
-<p>Haciendo una rápida investigación en diversos portales de internet, se notó que para problemas de clasificación de imágenes, es de suma popularidad la implementación de redes neuronales para esta tarea, siendo estas las más usadas en competencias de kaggle y las de más renombre en artículos de Machine Learning orientados a la clasificación de imágenes por características puntuales. </p>
-<p><img src="https://miro.medium.com/max/6592/1*2G4GdnBQW5bcjJx4rSuZxg.gif" alt="nnet"></p>
-<h3 id="implementación-y-resultados-">Implementación y resultados <a name="construcción"></a></h3>
-<p>Inicialmente, se ajustaron varios modelos como bosques aleatorios y redes neuronales artificiales haciendo uso de las componentes principales descritas en el apartado anterior. Sin embargo, estos esfuerzos resultaron infructuosos puesto que los modelos obtuvieron desempeños muy pobres y presentaron un marcado sobreajuste. Esto puede ser explicado gracias a la naturaleza del primer método de clasificación y debido a no tomar medidas preventivas como el dropout en el segundo. Cabe resaltar también, que la base de datos contruída a través de web Scraping no era la más adecuada y con esto se puede explicar en cierta medida el por qué del pobre poder predictivo de los modelos obtenidos en un primer acercamiento a la resolución. </p>
-<p>Luego de esto, como se mencionó anteriormente, se opta por usar una base de datos de la plataforma  <a href="https://www.kaggle.com/jeffheaton/glasses-or-no-glasses">Kaggle</a>, la cual contiene sujetos tanto con lentes como sin lentes. El modelamiento en este paso se hizo a través del API de Keras, el cual permitió el preprocesamiento de las imágenes y el ajuste de una red neuronal convolucional, posibilitando generar más imágenes de las que se disponía introduciendo ruido y variaciones en estas, como por ejemplo reflejarlas verticalmente, rotarlas o cambiar su tamaño. </p>
-<p><img src="https://miro.medium.com/max/1400/1*T7CqlFV5aRm6MxO5nJt7Qw.gif" alt="conv"></p>
-<h2 id="conclusiones-">Conclusiones <a name="conclusiones"></a></h2>
-<h2 id="referencias-si-las-hay-xd-">Referencias (si las hay xd) <a name="referencias"></a></h2>
-<script async src='/cdn-cgi/bm/cv/669835187/api.js'></script><script type="text/javascript">(function(){window['__CF$cv$params']={r:'6d688ec7b83d09a6',m:'yBkHja0kR5eS7XKDjgnH56WbC6rI5RA.sfn0pD.xU8s-1643691014-0-AYZIXIiz8HUhneHQaHzGcZxPKAk4lawQETfTRHn9xjUA9C90TN85rOlRCdGgaxV6SjykXcKxeZdGVHCPSQBG2MF/d6v/QfQi+LP/zteRSEWIRtuqxkPYjmEZPx1VXnxFQ10uH0cJLec9wUlyAqXAOy8I63Gy91QMAl3PYHKGX5fY6zsIZgNlxfeNu+xlNKd03UgEwVDmLVbvPp9xU15WcdA=',s:[0x26c740cc09,0xbf0131b092],}})();</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <title>Informe técnico imágenes</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="informe-técnico" class="display-5 fw-bold">
+            <center>Informe Técnico Clasificación de imágenes</center>
+        </h1>
+        <main>
+            <div class="p-5 mb-4 bg-light rounded-3" id="us" style="background-color: white !important;">
+                <div class="container-fluid py-5" id="ustwo">
+                    <h2 class="display-10 fw-bold">Realizado por</h1>
+                </div>
+                <hr>
+            </div>
+            <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel"
+                style="padding-top: 10%;">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3"
+                        aria-label="Slide 4"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="5000">
+                        <div class="text-center">
+                            <h1 class="display-5 fw-bold">Simón Pedro Galeano Muñoz</h1>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-9" style="padding-top: 5rem;">
+                                    <p class="lead mb-4 fs-3">
+                                        Estudiante de estadística, amante de los datos y de las
+                                        matemáticas, entusiasta de
+                                        la
+                                        programación y de las buenas caminatas.
+                                    </p>
+                                </div>
+                                <div class="col-sm">
+                                    <a href="https://github.com/SimonPGM" target="_blank">
+                                        <img class="d-block mx-auto mb-4"
+                                            src="https://avatars.githubusercontent.com/u/71856010?v=4" alt=""
+                                            style="border-radius: 50%; width: 100%;">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="5000">
+                        <div class="text-center">
+                            <h1 class="display-5 fw-bold">Sebastián Gaviria Sánchez</h1>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-9" style="padding-top: 5rem;">
+                                    <p class="lead mb-4 fs-3">
+                                        Estudiante de estadística, apasionado por los datos, su
+                                        procesamiento y el modelado
+                                        predictivo.
+                                    </p>
+                                </div>
+                                <div class="col-sm">
+                                    <a href="https://github.com/SebastianGaviria36" target="_blank">
+                                        <img class="d-block mx-auto mb-4"
+                                            src="https://avatars.githubusercontent.com/u/82337893?v=4" alt=""
+                                            style="border-radius: 50%; width: 100%;">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="5000">
+                        <div class="text-center">
+                            <h1 class="display-5 fw-bold">Verónica Ríos Vargas</h1>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-9" style="padding-top: 5rem;">
+                                    <p class="lead mb-4 fs-3">
+                                        Estudiante de Ingeniería de Control, con amor por el
+                                        IoT, la automatización y los
+                                        datos.
+                                    </p>
+                                </div>
+                                <div class="col-sm">
+                                    <a href="https://github.com/vriosv79" target="_blank"></a>
+                                    <img class="d-block mx-auto mb-4"
+                                        src="https://avatars.githubusercontent.com/u/58831165?v=4" alt=""
+                                        style="border-radius: 50%; width: 100%;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="5000">
+                        <div class="text-center">
+                            <h1 class="display-5 fw-bold">Juan José Galeano Arenas</h1>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-9" style="padding-top: 5rem;">
+                                    <p class="lead mb-4 fs-3">
+                                        Estudiante de estadística, apasionado por el machine
+                                        learning, aficionado a los
+                                        deportes y a los videojuegos.
+                                    </p>
+                                </div>
+                                <div class="col-sm">
+                                    <a href="https://github.com/jgaleanoa" target="_blank">
+                                        <img class="d-block mx-auto mb-4"
+                                            src="https://avatars.githubusercontent.com/u/82337913?v=4" alt=""
+                                            style="border-radius: 50%; width: 100%;">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <h2 id="tabla-de-contenido" class="display-10 fw-bold">Tabla de contenido</h2>
+        <ul>
+            <li class="list-group-item"><a href="#disposici%C3%B3n-del-problema-">Disposición del problema <a
+                        name="introduccion"></a></a></li>
+            <li class="list-group-item"><a href="#web-scraping-y-construcci%C3%B3n-de-la-base-de-datos-">Web Scraping y
+                    construcción de la base
+                    de datos
+                    <a name="basedatos"></a></a></li>
+            <li class="list-group-item"><a href="#preprocesamiento-de-la-base-de-datos-">Preprocesamiento de la base de
+                    datos <a name="preprocesamiento"></a></a>
+                <ul>
+                    <li class="list-group-item"><a href="#depuraci%C3%B3n-">Depuración <a name="depuracion"></a></a>
+                    </li>
+                    <li class="list-group-item"><a href="#adecuaci%C3%B3n-de-la-escala-y-color-">Adecuación de la escala
+                            y color <a name="escala"></a></a></li>
+                </ul>
+            </li>
+            <li class="list-group-item"><a href="#componentes-principales-">Componentes principales <a
+                        name="pca"></a></a></li>
+            <li class="list-group-item"><a href="#modelado-">Modelado <a name="modelado"></a></a>
+                <ul>
+                    <li class="list-group-item"><a href="#implementaci%C3%B3n-y-resultados-">Implementación y resultados
+                            <a name="construcción"></a></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="list-group-item"><a href="#funcionamiento">Funcionamiento del modelo</a></li>
+            <li class="list-group-item"><a href="#conclusiones-">Conclusiones <a name="conclusiones"></a></a></li>
+            <li class="list-group-item"><a href="#referencias-si-las-hay-xd-">Referencias (si las hay xd) <a
+                        name="referencias"></a></a></li>
+        </ul>
+        <h2 id="disposición-del-problema-" class="display-10 fw-bold">Disposición del problema <a
+                name="introduccion"></a></h2>
+        <p class="lead mb-4 fs-4">Resulta interesante y además de suma utilidad identificar características particulares
+            en diferentes imágenes
+            que se
+            tengan a disposición. Sin embargo, esta tarea puede resultar altamente exhaustiva si se realiza a manos
+            humanas. Así
+            entonces, en este desarrollo se aborda el asunto de identificación de características particulares en fotos
+            y con
+            ello la clasificación de las mismas, pero haciendo uso de múltiples técnicas estadísticas para la
+            automatización del
+            proceso. </p>
+        <p class="lead mb-4 fs-4">Específicamente se desea clasificar imágenes de personas, las cuales serán
+            categorizadas según si hacen uso o
+            no de
+            lentes de sol. Para esta causa, se debe proceder inicialmente con la construcción de una base de datos de un
+            buen
+            tamaño que permita la implementación de algún modelo apropiado para la tarea de clasificación. Continúa
+            leyendo para
+            adentrarte en los detalles de este proyecto. </p>
+        <h2 id="web-scraping-y-construcción-de-la-base-de-datos-" class="display-10 fw-bold">Web Scraping y construcción
+            de la base de datos <a name="basedatos"></a></h2>
+        <p class="lead mb-4 fs-4">Como se mencionó anteriormente, en un primer paso se debe proceder a construir una
+            base de datos
+            (suficientemente
+            grande) para entrenar un modelo de clasificación que pueda identificar con un buen desempeño si una persona
+            usa o no
+            gafas de sol. Sin embargo, recopilar una cantidad de imágenes suficiente puede no ser muy práctico en
+            términos de
+            tiempo. </p>
+        <p class="lead mb-4 fs-4">Por esto, se decidió automatizar este proceso haciendo uso de Scrapy como backend para
+            obtener imágenes a
+            través de
+            Splash.</p>
+        <p class="lead mb-4 fs-4">En un primer intento la página de <a href="https://www.freepik.es/">Freepik</a> sirvió
+            como sitio contenedor
+            de las
+            imágenes, sin embargo, esta metodología resultó poco factible ya que se dificulta el control de las imágenes
+            obtenidas a través de esta técnica de programación.</p>
+        <p class="lead mb-4 fs-4">Luego de esto se recopiló una base de datos encontrada en la plataforma <a
+                href="kaggle.com">Kaggle</a> para
+            posteriormente preprocesarla y ajustar diversos modelos con esta.</p>
+        <div class="gif">
+            <img src="https://miro.medium.com/max/1024/1*nHfayfdmxAApbg84iMrJqQ.gif" alt="scrapi" class="gif">
+        </div>
+        <h2 id="preprocesamiento-de-la-base-de-datos-" class="display-10 fw-bold">Preprocesamiento de la base de datos
+            <a name="preprocesamiento"></a>
+        </h2>
+        <p class="lead mb-4 fs-4">Una vez obtenidas las imágenes con las cuales se va a entrenar el modelo de
+            clasificación, gracias al método
+            por el
+            cuál fueron obtenidas, pudieran filtrarse algunas cuantas que no cumplan con los requisitos deseados para un
+            correcto entrenamiento del modelo de clasificación. Además de esto, no todas las fotos se encuentran en la
+            misma
+            escala de pixeles, por lo cuál se debe depurar la base de datos y redimensionar las imágenes a un tamaño
+            estándar de
+            alto y ancho. </p>
+        <p class="lead mb-4 fs-4">
+            Teniendo en cuenta que la base de datos recolectada a través de web scrapping no era de muy buena calidad,
+            se decidió tomar una base de datos distinta, la cual se preprocesó y modificó usando el paquete Keras. Allí
+            se escalaron las imágenes a un tamaño 30x30 puesto que las imágenes objetivo (las del CMU) se encontraban en
+            relación de aspecto 32:30, así, esta elección era adecuada para no perder mucha calidad en las imágenes,
+            teniendo en cuenta tanto la relación de aspecto de las imágenes del CMU como el hecho de que todas las
+            imágenes de la nueva base de datos son cuadradas. Adicionalmente, se generaron más imágenes introduciendo
+            ruido en estas, como se puede ver a continuación.
+        </p>
+        <div class="gif">
+            <div class="rowimg">
+                <img src="Images/normal.png" alt="" class="gif">
+                <img src="Images/transformed.png" class="gif">
+            </div>
+        </div>
+        <h3 id="depuración-" class="display-15 fw-bold">Depuración <a name="depuracion"></a></h3>
+        <p class="lead mb-4 fs-4">Como se mencionó en el apartado anterior, se cuenta con dos carpetas, una que contiene
+            las imágenes de
+            personas que
+            usan gafas de sol y otra en donde las imágenes son de personas sin estas. Así entonces, para depurar las
+            imágenes
+            que no cumplieran con alguno de estos dos requisitos respectivos, se realizó manualmente la tarea de revisar
+            de
+            forma exhaustiva cada una de estas dos carpetas, eliminar los elementos no deseados y de este modo conseguir
+            un
+            material de trabajo limpio y apropiado para los desarrollos posteriores. </p>
+        <h3 id="adecuación-de-la-escala-y-color-" class="display-15 fw-bold">Adecuación de la escala y color <a
+                name="escala"></a></h3>
+        <p class="lead mb-4 fs-4">Para estandarizar el tamaño de las imágenes se usó la librería de python OpenCV,
+            específicamente el método
+            &quot;resize&quot; con la cual se definió un tamaño de 32x30 pixeles para cada imágen en la base de datos.
+        </p>
+        <p class="lead mb-4 fs-4">En un primer intento se intentó acudir a la librería Skimage con su método propio
+            &quot;resize&quot;, para
+            realizar
+            esta tarea, sin embargo, al intentar guardar la imágen el archivo se corrompía y se conseguía por resultado
+            un
+            fondo
+            negro sin ningún tipo de información relevante. <br>
+        </p>
+        <p class="lead mb-4 fs-4">Por último, para terminar con la adecuación pertinente del material, se transformaron
+            las imágenes de formato
+            RGB a
+            escala de grises con el fin de obtener un solo canal, el cual corresponde a la intensidad, y simplificar de
+            este
+            modo los procesos posteriores. </p>
+        <p class="lead mb-4 fs-4">
+            Es necesario hacer mención que para la base de datos nueva se realizó toda la adecuación usando netamente
+            Opencv y Keras.
+        </p>
+        <h2 id="componentes-principales-" class="display-10 fw-bold">Componentes principales <a name="pca"></a></h2>
+        <p class="lead mb-4 fs-4">Con lo anterior se logró construir una base de datos extensa que comprendió 32 x 30 =
+            960 variables
+            constituídas por
+            la intensidad de pixeles en cada imágen. En total se obtuvieron 6313 observaciones (imágenes) en 960
+            variables. </p>
+        <p class="lead mb-4 fs-4">Una vez con el material adecuado a disposición, el proceso a seguir en este desarrollo
+            fue apostar a una
+            reducción de
+            la dimensionalidad original de los datos usando la metodología de análisis de componentes principales (PCA).
+        </p>
+        <p class="lead mb-4 fs-4">Sabiendo de antemano la teoría necesaria para llevar a cabo este método de aprendizaje
+            no supervisado, se
+            acudió a la
+            clase PCA de la librería sklearn.decomposition, con la cual se construyó un wrapper que cumplió la función
+            de
+            aplicar esta metodología a los datos originales conservando únicamente las componentes principales que
+            lograran
+            explicar un porcentaje de variabilidad deseado por el usuario, en este caso del 90%.</p>
+        <p class="lead mb-4 fs-4">Finalmente, implementado el procedimiento anterior, se obtuvo un reducción de
+            dimensionalidad sustancial
+            conservando
+            únicamente 155 componentes principales, es decir, un 16.14% de la información total para explicar
+            mínimamente el 90%
+            de la variabilidad total. </p>
+        <p class="lead mb-4 fs-4">Con esto, se llegó a una base de datos ideal para comenzar el proceso de modelación.
+        </p>
+        <div class="gif">
+            <img src="https://miro.medium.com/max/1400/1*T7CqlFV5aRm6MxO5nJt7Qw.gif" alt="conv" class="gif">
+        </div>
+        <h2 id="modelado-" class="display-10 fw-bold">Modelado <a name="modelado"></a></h2>
+        <p class="lead mb-4 fs-4">Haciendo una rápida investigación en diversos portales de internet, se notó que para
+            problemas de
+            clasificación de
+            imágenes, es de suma popularidad la implementación de redes neuronales para esta tarea, siendo estas las más
+            usadas
+            en competencias de kaggle y las de más renombre en artículos de Machine Learning orientados a la
+            clasificación de
+            imágenes por características puntuales. </p>
+        <div class="gif">
+            <img src="https://miro.medium.com/max/6592/1*2G4GdnBQW5bcjJx4rSuZxg.gif" alt="nnet" class="gif">
+        </div>
+        <h3 id="implementación-y-resultados-" class="display-15 fw-bold">Implementación y resultados <a
+                name="construcción"></a></h3>
+        <p class="lead mb-4 fs-4">Inicialmente, se ajustaron varios modelos como bosques aleatorios y redes neuronales
+            artificiales haciendo
+            uso de las
+            componentes principales descritas en el apartado anterior. Sin embargo, estos esfuerzos resultaron
+            infructuosos
+            puesto que los modelos obtuvieron desempeños muy pobres y presentaron un marcado sobreajuste. Esto puede ser
+            explicado gracias a la naturaleza del primer método de clasificación y debido a no tomar medidas preventivas
+            como el
+            dropout en el segundo. Cabe resaltar también, que la base de datos contruída a través de web Scraping no era
+            la más
+            adecuada y con esto se puede explicar en cierta medida el por qué del pobre poder predictivo de los modelos
+            obtenidos en un primer acercamiento a la resolución. </p>
+        <p class="lead mb-4 fs-4">Luego de esto, como se mencionó anteriormente, se opta por usar una base de datos de
+            la plataforma <a href="https://www.kaggle.com/jeffheaton/glasses-or-no-glasses">Kaggle</a>, la cual contiene
+            sujetos
+            tanto con
+            lentes como sin lentes. El modelamiento en este paso se hizo a través del API de Keras, el cual permitió el
+            preprocesamiento de las imágenes y el ajuste de una red neuronal convolucional, posibilitando generar más
+            imágenes
+            de las que se disponía introduciendo ruido y variaciones en estas, como por ejemplo reflejarlas
+            verticalmente,
+            rotarlas o cambiar su tamaño. </p>
+        <h2 id="funcionamiento" class="display-15 fw-bold">Funcionamiento del modelo</h2>
+        <p class="lead mb-4 fs-4">
+            En primer lugar el modelo realiza un preprocesamiento de la imagen como se muestra a continuación
+        </p>
+        <div class="gif"><img src="Images/seq.png" alt="" class="gif">
+        </div>
+        <p class="lead mb-4 fs-4">
+            Luego de esto, se realiza una convolución en las imágenes para luego así ir extrayendo carácteristicas
+            importantes de las imágenes usando un agrupamiento de
+            pixeles 2x2
+        </p>
+        <div class="gif"><img src="https://mlnotebook.github.io/img/CNN/convSobel.gif" alt="" class="gif">
+        </div>
+        <p class="lead mb-4 fs-4">
+            Finalmente, las imagenes resultantes son aplanadas y son pasadas por dos capas de una red neuronal
+            artificial,
+            la cual intenta predecir si el individuo tiene gafas (0) y si el individuo no tiene gafas (1).
+        </p>
+        <div class="gif"><img src="https://wand-research.com/wp-content/uploads/2018/02/understanding-cnn.gif" alt=""
+                class="gif">
+        </div>
+        <h2 id="metricas" class="display-15 fw-bold">Reporte de métricas</h2>
+        <p class="lead mb-4 fs-4">A continuación se presetan algunas métricas obtenidas por el modelo tanto en el
+            conjunto de entrenamiento
+            como en el de validación.</p>
+        <div class="gif">
+            <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Conjunto de datos</th>
+                    <th scope="col">Exactitud</th>
+                    <th scope="col">Precisión</th>
+                    <th scope="col">Especificidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Entrenamiento</th>
+                    <td>0.55044</td>
+                    <td>0.3554</td>
+                    <td>0.2835</td>
+                </tr>
+                <tr>
+                    <th scope="row">Validación</th>
+                    <td>0.4322</td>
+                    <td>0.3571</td>
+                    <td>0.9253</td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+
+        <h2 id="conclusiones-" class="display-10 fw-bold">Conclusiones <a name="conclusiones"></a></h2>
+        <ul>
+            <li>
+                <p class="lead mb-4 fs-4">En el conjunto de validación el modelo se ve fuertemente afectado por el
+                    tamaño de las imágenes
+                    puesto que, este fué entrenado usando fotos en formato cuadrado, por lo cual a la hora de realizar
+                    las respectivas predicciones, fué necesario redimensionar las imágenes del conjunto de validación,
+                    perdiendo de este modo mucha calidad y afectando drásticamente el desempeño del modelo final. </p>
+            </li>
+            <li>
+                <p class="lead mb-4 fs-4">Para mejorar la capacidad de respuesta del modelo entrenado, las imágenes con
+                    las cuales se entrene y
+                    se ponga a prueba deben ser concretas en su contenido, es decir, que el enfoque principal de la
+                    fotografía se dirija hacia la cara del sujeto y si este mismo posee o no lentes, evitando de este
+                    modo ambiguedades, ruido en el modelo y por ende un pésimo desempeño.</p>
+            </li>
+            <li>
+                <p class="lead mb-4 fs-4">Por último, se recomienda a las personas interesadas en esta línea de trabajo,
+                    que se enfoquen en
+                    recopilar material de entrenamiento claro y de gran calidad en haras de ajustar modelos robustos y
+                    de buen desempeño que generalicen según lo esperado.</p>
+            </li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
