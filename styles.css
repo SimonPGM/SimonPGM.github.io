@@ -12,3 +12,33 @@ div.rowimg {
     display: flex;
     flex-flow: row;
 }
+
+.mathcontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+div.mathrow {
+    display: flex;
+}
+
+div.ml {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+div.mlrow {
+    display: flex;
+}
+
+img.random {
+    width: 500px!important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    text-align: center;
+}

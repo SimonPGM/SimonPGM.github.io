@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+    <script src="Animated/sketchnefroid.js"></script>
+    <script src="Animated/sketchcircles.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <title>Informe arte generativo</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="display-5 fw-bold">
+            Informe Técnico Arte Generativo
+        </h1>
+        <div class="p-5 mb-4 bg-light rounded-3" id="us" style="background-color: white !important;">
+            <div class="container-fluid py-5" id="ustwo">
+                <h2 class="display-10 fw-bold">Realizado por</h1>
+            </div>
+            <hr>
+        </div>
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <div class="text-center">
+                        <h1 class="display-5 fw-bold">Simón Pedro Galeano Muñoz</h1>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-9" style="padding-top: 5rem;">
+                                <p class="lead mb-4 fs-3">
+                                    Estudiante de estadística, amante de los datos y de las
+                                    matemáticas, entusiasta de
+                                    la
+                                    programación y de las buenas caminatas.
+                                </p>
+                            </div>
+                            <div class="col-sm">
+                                <a href="https://github.com/SimonPGM" target="_blank">
+                                    <img class="d-block mx-auto mb-4"
+                                        src="https://avatars.githubusercontent.com/u/71856010?v=4" alt=""
+                                        style="border-radius: 50%; width: 100%;">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <div class="text-center">
+                        <h1 class="display-5 fw-bold">Sebastián Gaviria Sánchez</h1>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-9" style="padding-top: 5rem;">
+                                <p class="lead mb-4 fs-3">
+                                    Estudiante de estadística, apasionado por los datos, su
+                                    procesamiento y el modelado
+                                    predictivo.
+                                </p>
+                            </div>
+                            <div class="col-sm">
+                                <a href="https://github.com/SebastianGaviria36" target="_blank">
+                                    <img class="d-block mx-auto mb-4"
+                                        src="https://avatars.githubusercontent.com/u/82337893?v=4" alt=""
+                                        style="border-radius: 50%; width: 100%;">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <div class="text-center">
+                        <h1 class="display-5 fw-bold">Verónica Ríos Vargas</h1>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-9" style="padding-top: 5rem;">
+                                <p class="lead mb-4 fs-3">
+                                    Estudiante de Ingeniería de Control, con amor por el
+                                    IoT, la automatización y los
+                                    datos.
+                                </p>
+                            </div>
+                            <div class="col-sm">
+                                <a href="https://github.com/vriosv79" target="_blank"></a>
+                                <img class="d-block mx-auto mb-4"
+                                    src="https://avatars.githubusercontent.com/u/58831165?v=4" alt=""
+                                    style="border-radius: 50%; width: 100%;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <div class="text-center">
+                        <h1 class="display-5 fw-bold">Juan José Galeano Arenas</h1>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-9" style="padding-top: 5rem;">
+                                <p class="lead mb-4 fs-3">
+                                    Estudiante de estadística, apasionado por el machine
+                                    learning, aficionado a los
+                                    deportes y a los videojuegos.
+                                </p>
+                            </div>
+                            <div class="col-sm">
+                                <a href="https://github.com/jgaleanoa" target="_blank">
+                                    <img class="d-block mx-auto mb-4"
+                                        src="https://avatars.githubusercontent.com/u/82337913?v=4" alt=""
+                                        style="border-radius: 50%; width: 100%;">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <br>
+        <h2 class="display-10 fw-bold">
+            ModelArt
+        </h2>
+        <h3 class="display-15 fw-bold">Obras creadas a partir de un modelo KNN</h3>
+        <p class="lead mb-4 fs-4">
+            Inicialmente, para construir la colección de obras creadas a partir de diferentes técnicas de aprendizaje
+            estadístico, se tomó como referencia e inspiración las obras generadas por el paquete de R
+            <a href="https://koenderks.github.io/aRtsy/">aRtsy</a>.
+
+            Así entonces, la primera obra de esta colección fué creada a partir de un modelo KNN usando dos variables
+            discretas en el rango 0-200. El modelo se ajustó tomando k = 200 vecinos más cercanos ya que en intentos
+            anteriores se descubrió que, con un número pequeño elegido para k, no se obtenían aquellos "cúmulos" o
+            aglomeraciones deseadas para efectos visuales. Finalmente, para dar un efecto de "nube" a través de una luz
+            cálida, se escogen los colores dorado y blanco optando por interpolar linealmente la respuesta del modelo
+            para así eliminar fronteras de cúmulos demasiado definidas.
+        </p>
+        <p class="lead mb-4 fs-4">
+            La siguiente obra fué muy similar a la primera; usando el método de clasificación KNN, pero esta vez sin
+            elegir el parámetro k (vecinos más cercanos para clasificar). De igual forma se creó un par de covariables
+            aleatorias en el rango 0-200 y un vector de etiquetas (respuesta) con los colores a graficar para ajustar
+            dicho modelo. Seguidamente se realizan las predicciones correspondientes usando datos generados de forma
+            secuencial en el rango de las covariables originales, y se dispone el gráfico con la diferencia que en esta
+            ocasión no se interpolan los límites de los conglomerados para obtener un efecto de "salpicadura". La paleta
+            de colores elegida para esta obra recorre los colores café, blanco, beige y negro para obtener tonalidades
+            "tierra" u "orgánicas".
+        </p>
+        <div class="ml">
+            <div class="rowml"><img src="ImgsArt/knnsmoothART.png"></div>
+            <div class="rowml"><img src="ImgsArt/knnsplatterART.png"></div>
+        </div>
+        <br>
+        <h3 class="display-15 fw-bold">Obras creadas a partir de modelos de ensamble</h3>
+        <p class="lead mb-4 fs-4">
+            Seguidamente, la tercera obra de la colección fué generada a partir de un modelo RandomForest, donde en un
+            procedimiento muy similar al anterior, se generaron dos variables aleatorias distribuídas Uniforme(0, 200) y
+            una variable respuesta con las etiquetas "blanco" y "negro" que después facilitaría la implementación
+            gráfica. Posteriormente se ajusta el modelo RandomForest sin parámetros tuneados, pues para este caso no es
+            de interés dicho procedimento. Una vez obtenido el modelo, se producen dos nuevas covariables aleatoriamente
+            en el rango original de los datos para con estas hacer la predicción respectiva. Finalmente, como se
+            mencionó arriba, la variable respuesta fué creada con las etiquetas "blanco" y "negro", y con esta
+            especificación se construyó el gráfico correspondiente obteniendo un toque "industrial monocromático"
+        </p>
+        <p class="lead mb-4 fs-4">
+            Finalmente, la última obra creada usando métodos de aprendizaje estadístico, fué generada usando los datos
+            predichos por un modelo de bagging con un comportamiento un tanto peculiar. La creación tanto de las
+            covariables y la respuesta como de las predicciones es totalmente homóloga al procedimiento descrito
+            anteriormente. Sin embargo, lo interesante de esta obra reside en el comportamiento del modelo hallado, pues
+            este último aunque fué ajustado usando dos covariables "x" e "y", sólo toma en cuenta los valores de "x"
+            para realizar las predicciones y sobre los valores de "y", el modelo se mantiene constante. De forma visual,
+            este fenómeno se manifiesta con líneas que atraviezan el lienzo de forma completamente vertical,
+            asemejándose de este modo a un código de barras. Los colores elegidos para este caso son intensos de colores
+            cálidos para resaltar las características de la obra.
+
+            El mal comportamiento del modelo conseguido usando bagging puede deberse a inconsistencias en la
+            construcción del mismo y con esto a un pésimo ajuste de este a los datos originales, sin embargo para esta
+            causa ese aspecto no es de interés y lo que centra la atención es el llamativo efecto visual conseguido.
+
+        </p>
+        <div class="ml">
+            <div class="rowml"><img src="ImgsArt/BaggingART.png"></div>
+            <div class="rowml"><img src="ImgsArt/rfART.png"></div>
+        </div>
+        <br>
+        <h2 class="display-10 fw-bold">
+            AleatorizArte
+        </h2>
+        <h3 class="display-15 fw-bold">Simulación del proceso</h3>
+
+        <p class="lead mb-4 fs-4">
+            Para la simular armonógrafos espectrales se utilizaron las librerias pygame, pygame.locals, sys, random,
+            numpy, time, re y os, además de las funciones pi y sin de la librería math. <br>
+            La librería pygame se utilizo para desplegar una ventana que simule el proceso de trazado de cada curva, el
+            resto
+            librerías así como sus respectivas funciones/métodos fueron usadas para la creación de las curvas.
+            Las curvas fueron generadas con funciones seno en los ejes x e y, siendo representadas de la siguiente
+            manera
+            \[x = A_1Sin(\omega_1 t_1 + \varphi_1) + A_2Sin(\omega_2 t_2 + \varphi_2)\]
+            \[y = A_3Sin(\omega_3 t_3 + \varphi_3) + A_4Sin(\omega_4 t_4 + \varphi_4)\]
+        </p>
+
+        <p class="lead mb-4 fs-4">
+            Para la generación de $x$ e $y$ considere el vector aleatorio
+            $\eta = \begin{bmatrix} \omega_1 \ \omega_2 \ \omega_3 \ \omega_4 \end{bmatrix}^T$
+            \[\eta \sim N\left(\begin{bmatrix} 0 \\
+            0 \\
+            0 \\
+            0
+            \end{bmatrix},
+            \begin{bmatrix} \sigma_1^2 \ 0\ 0\ 0 \\
+            0 \ \sigma_2^2 \ 0 \ 0 \\
+            0 \ 0 \ \sigma_3^2 \ 0 \\
+            0 \ 0 \ 0 \ \sigma_4^2
+            \end{bmatrix}\right)\]
+            con $\sigma_i^2 \sim U(0, \ 1)$, $\varphi_i \sim U(0, 2\pi)$, $A_i \sim U_D[-4, 4]$ para $i = 1,2,3,4$ <br>
+            Finalmente, mediante un proceso iterativo se generó una secuencia de valores para $x$ e $y$ y se obtuvieron
+            las
+            siguientes imágenes.
+        </p>
+        <p class="lead mb-4 fs-4">
+            Para visualizar una imagen detenidamente, pon el mouse sobre ella, para ver todo el contenido de manera
+            automática, no pongas el mouse sobre las imágenes, ni a lo ancho de ellas.
+        </p>
+        <div class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="2000">
+                    <img class="d-block w-100 random" src="ImgsArt/oscilatorio01.jpg">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100 random" src="ImgsArt/oscilatorio03.jpg">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100 random" src="ImgsArt/oscilatorio05.jpg">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100 random" src="ImgsArt/oscilatorio06.jpg">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100 random" src="ImgsArt/oscilatorio07.jpg">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100 random" src="ImgsArt/oscilatorio08.jpg">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100 random" src="ImgsArt/oscilatorio11.jpg">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100 random" src="ImgsArt/oscilatorio12.jpg">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100 random" src="ImgsArt/oscilatorio13.jpg">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100 random" src="ImgsArt/oscilatorio15.jpg">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100 random" src="ImgsArt/oscilatorio19.jpg">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100 random" src="ImgsArt/oscilatorio22.jpg">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100 random" src="ImgsArt/oscilatorio25.jpg">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100 random" src="ImgsArt/oscilatorio29.jpg">
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <h2 class="display-10 fw-bold">
+            Matearte
+        </h2>
+        <p class="lead mb-4 fs-4">
+            En esta sección se presentan algunos de los resultados de crear arte mediante el uso
+            de concéptos puramente matemáticos.
+        </p>
+        <h3 class="display-15 fw-bold">
+            Obras animadas
+        </h3>
+        <div class="mathcontainer">
+            <div class="mathrow" id="mathone"></div>
+
+            <div class="mathrow" id="mathtwo"></div>
+        </div>
+        <br>
+        <p class="lead mb-4 fs-4">
+            En primer lugar se aprecian imágenes animadas haciendo uso de la librería p5 de JavaScript,
+            donde la imagen que se logra apreciar como primera hace uso de las coordenadas polares
+            para describir un bello patrón a dos colores de rotaciones opuestas a distintas tasas
+            de variación en la posición de los puntos durante su trayecto. Asimismo, la segunda imagen
+            apreciable describe una trayectoria en el plano polar conocida como nefroide, donde la genración de los
+            colores se realiza de manera aleatoria.
+        </p>
+        <h3 class="display-15 fw-bold">
+            Obras vectoriales
+        </h3>
+        <p class="lead mb-4 fs-4">
+            Ahora, en este punto se exponen varias imágenes que son representaciones de un concepto muy común y útil
+            en la teoría de ecuaciones diferenciales ordinarias como lo es el campo de pendientes que muestra el
+            comportamiento de las soluciones de una ecuación diferencial.
+        </p>
+        <p class="lead mb-4 fs-4">
+            Para visualizar una imagen detenidamente, pon el mouse sobre ella, para ver todo el contenido de manera
+            automática, no pongas el mouse sobre las imágenes.
+        </p>
+        <div class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="2000">
+                    <img class="d-block w-100" src="ImgsArt/Power.png">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100" src="ImgsArt/VF1.png">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100" src="ImgsArt/VF2.png">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100" src="ImgsArt/VF3.png">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img class="d-block w-100" src="ImgsArt/VF4.png">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div id="carouselExampleDark2" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <div class="text-center">
+                        <h1 class="display-5 fw-bold">Repositorio de GitHub</h1>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-9" style="padding-top: 5rem;">
+                                <p class="lead mb-4 fs-3">
+                                    Si quieres ver el código con el que fueron hechas estas bellas obras
+                                    y todo lo que hay detrás de su elaboración, te invitamos
+                                    a que visites el repositorio del proyecto. Da click al logo para más información.
+                                </p>
+                            </div>
+                            <div class="col-sm">
+                                <a href="https://github.com/SimonPGM/generativeart" target="_blank">
+                                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                                        style="border-radius: 50%; width: 100%;">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
