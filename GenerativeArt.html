@@ -24,7 +24,7 @@
             }
         };
     </script>
-</head>
+<script async src='/cdn-cgi/bm/cv/669835187/api.js'></script><script async src='/cdn-cgi/bm/cv/669835187/api.js'></script></head>
 
 <body>
     <div class="container">
@@ -154,7 +154,7 @@
             estadístico, se tomó como referencia e inspiración las obras generadas por el paquete de R
             <a href="https://koenderks.github.io/aRtsy/">aRtsy</a>.
 
-            Así entonces, la primera obra de esta colección fué creada a partir de un modelo KNN usando dos variables
+            Así entonces, la primera obra de esta colección fue creada a partir de un modelo KNN usando dos variables
             discretas en el rango 0-200. El modelo se ajustó tomando k = 200 vecinos más cercanos ya que en intentos
             anteriores se descubrió que, con un número pequeño elegido para k, no se obtenían aquellos "cúmulos" o
             aglomeraciones deseadas para efectos visuales. Finalmente, para dar un efecto de "nube" a través de una luz
@@ -162,7 +162,7 @@
             para así eliminar fronteras de cúmulos demasiado definidas.
         </p>
         <p class="lead mb-4 fs-4">
-            La siguiente obra fué muy similar a la primera; usando el método de clasificación KNN, pero esta vez sin
+            La siguiente obra fue muy similar a la primera; usando el método de clasificación KNN, pero esta vez sin
             elegir el parámetro k (vecinos más cercanos para clasificar). De igual forma se creó un par de covariables
             aleatorias en el rango 0-200 y un vector de etiquetas (respuesta) con los colores a graficar para ajustar
             dicho modelo. Seguidamente se realizan las predicciones correspondientes usando datos generados de forma
@@ -178,24 +178,24 @@
         <br>
         <h3 class="display-15 fw-bold">Obras creadas a partir de modelos de ensamble</h3>
         <p class="lead mb-4 fs-4">
-            Seguidamente, la tercera obra de la colección fué generada a partir de un modelo RandomForest, donde en un
+            Seguidamente, la tercera obra de la colección fue generada a partir de un modelo RandomForest, donde en un
             procedimiento muy similar al anterior, se generaron dos variables aleatorias distribuídas Uniforme(0, 200) y
             una variable respuesta con las etiquetas "blanco" y "negro" que después facilitaría la implementación
             gráfica. Posteriormente se ajusta el modelo RandomForest sin parámetros tuneados, pues para este caso no es
             de interés dicho procedimento. Una vez obtenido el modelo, se producen dos nuevas covariables aleatoriamente
             en el rango original de los datos para con estas hacer la predicción respectiva. Finalmente, como se
             mencionó arriba, la variable respuesta fué creada con las etiquetas "blanco" y "negro", y con esta
-            especificación se construyó el gráfico correspondiente obteniendo un toque "industrial monocromático"
+            especificación se construyó el gráfico correspondiente, obteniendo un toque "industrial monocromático"
         </p>
         <p class="lead mb-4 fs-4">
-            Finalmente, la última obra creada usando métodos de aprendizaje estadístico, fué generada usando los datos
+            Finalmente, la última obra creada usando métodos de aprendizaje estadístico, fue generada usando los datos
             predichos por un modelo de bagging con un comportamiento un tanto peculiar. La creación tanto de las
             covariables y la respuesta como de las predicciones es totalmente homóloga al procedimiento descrito
             anteriormente. Sin embargo, lo interesante de esta obra reside en el comportamiento del modelo hallado, pues
             este último aunque fué ajustado usando dos covariables "x" e "y", sólo toma en cuenta los valores de "x"
             para realizar las predicciones y sobre los valores de "y", el modelo se mantiene constante. De forma visual,
             este fenómeno se manifiesta con líneas que atraviezan el lienzo de forma completamente vertical,
-            asemejándose de este modo a un código de barras. Los colores elegidos para este caso son intensos de colores
+            asemejándose de este modo a un código de barras. Los colores elegidos para este caso son intensos colores
             cálidos para resaltar las características de la obra.
 
             El mal comportamiento del modelo conseguido usando bagging puede deberse a inconsistencias en la
@@ -215,10 +215,10 @@
             En este apartado, se utilizan algunas distribuciones de probabilidad univariadas como ayuda para construir
             distribuciones normales multivariadas las cuales posteriormente son usadas para construir armonógrafos
             espectrales. <br>
-            Un <b>armonógrafo</b> es una máquina mecanica que utiliza pendulos para crear imágenes geométricas [1]; por
+            Un <b>armonógrafo</b> es una máquina mecánica que utiliza péndulos para crear imágenes geométricas [1]; por
             otro lado, un
             <b>espectro armónico</b> es un espectro que contiene únicamente componentes de frecuencia cuyas frecuencias
-            son multiplos enteros de la frecuencia fundamental. [2] <br>
+            son múltiplos enteros de la frecuencia fundamental[2].  <br>
             Sea $\omega$ la frecuencia fundamental, entonces un espectro armónico es de la forma
             \[\{\cdots, -2\omega, \ \omega, \ 0, \ \omega, \ 2\omega, \cdots\}\]
 
@@ -230,11 +230,10 @@
         <h3 class="display-15 fw-bold">Simulación del proceso</h3>
 
         <p class="lead mb-4 fs-4">
-            Para la simular armonógrafos espectrales se utilizaron las librerias pygame, pygame.locals, sys, random,
+            Para simular armonógrafos espectrales se utilizaron las librerias pygame, pygame.locals, sys, random,
             numpy, time, re y os, además de las funciones pi y sin de la librería math. <br>
-            La librería pygame se utilizo para desplegar una ventana que simule el proceso de trazado de cada curva, el
-            resto
-            librerías así como sus respectivas funciones/métodos fueron usadas para la creación de las curvas.
+            La librería pygame se utilizó para desplegar una ventana que simule el proceso de trazado de cada curva, el
+            resto de librerías así como sus respectivas funciones/métodos fueron usadas para la creación de las curvas.
             Las curvas fueron generadas con funciones seno en los ejes x e y, siendo representadas de la siguiente
             manera
             \[x = A_1Sin(\omega_1 t_1 + \varphi_1) + A_2Sin(\omega_2 t_2 + \varphi_2)\]
@@ -333,7 +332,7 @@
             donde la imagen que se logra apreciar como primera hace uso de las coordenadas polares
             para describir un bello patrón a dos colores de rotaciones opuestas a distintas tasas
             de variación en la posición de los puntos durante su trayecto. Asimismo, la segunda imagen
-            apreciable describe una trayectoria en el plano polar conocida como nefroide, donde la genración de los
+            apreciable describe una trayectoria en el plano polar conocida como nefroide, donde la generación de los
             colores se realiza de manera aleatoria.
         </p>
         <h3 class="display-15 fw-bold">
@@ -408,6 +407,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-</body>
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6da910ce7e97f25b',m:'UzKbP.13w.LyDUDs8e_cBfsC.ibKTPkTbsjb8FgeWSo-1644367429-0-AeNs6gA8DxFF+JkXwagkQwhMWBdaBossBI8h9GrrEn3oP2aGhzdLWicIAWImV311E/sRbL9RwpRjbnhDwRrvDaeT+UtPBecYHBcB8P4Mvw4/c43MrQYW67hUMOVYcBkjtznUzhPiZINDdOQ5kIWav7yJzq5waXK4nnWNHUU0iVhvXyfYmvoQoITDm+XV7yPvj+NGaLfeFvtj6T/ygyss3nU=',s:[0x01786a8e8b,0xe0f1e375d8],}})();</script><script type="text/javascript">(function(){window['__CF$cv$params']={r:'6daa001abb100a0e',m:'YIXLL1gv9d04SnA6CLo74SthLx5h2QgsvWVZIzwX4xs-1644377230-0-Aa1uzaFXam/HF4gs8zW/qv3w+Az7X1M8+gEERVtHUVfcH3FOzH31aIkAfD/b/nFvhXdayOx7cef5BFd+3RRFTTBu0vB3lgezCvUZH++tegRzzMp4s3WjIH9dm5W6E/HHfBK7XTVEOP8GjIf8dv0JcNjjndzUrfHSDCmpHYMmkWZqfU/aseWMHnNHQwmY955tH4eInPx8UAhAeMQEKZRi/bM=',s:[0x9f3384710a,0xaa6b31fa2d],}})();</script></body>
 
 </html>
