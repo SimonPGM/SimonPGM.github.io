@@ -1,0 +1,421 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+	<link rel="stylesheet" href="style.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<section>
+					<h1>Introducción</h1>
+					<img src="./images/alltexlogo.png">
+				</section>
+				<section>
+					Es una empresa que centra sus actividades económicas en la importación, producción
+					y comercialización de todo tipo de insumos para la industria textil. Su catálogo de productos
+					comprende desde todo tipo de hilos y filamentos, hasta telas y cauchos para uso industrial.
+				</section>
+				<section>
+					<h2>Ubicación</h2>
+					<p>
+						La sede principal de la compañía se encuentra ubicada en el parque empresarial Quality
+						center en el municipio de la estrella, sin embargo tienen presencia en las ciudades más grandes
+						del país.
+					</p>
+				</section>
+				<section>
+					<h2>Alltex en el mapa</h2>
+					<iframe width="600" height="450" src="../mapa.html"></iframe>
+				</section>
+				<section>
+					<h2>Alltex por fuera</h2>
+					<img src="./images/qualitycenter.jpg">
+				</section>
+				<section>
+					<h1>Proceso productivo de Alltex</h1>
+				</section>
+				<section>
+					<p>El proceso productivo de las telas comienza con la materia prima, la cual es constituída
+						por unos rollos de hilo, los cuales son escogidos dependiendo del tipo de tela que se esté
+						fabricando. Para este tipo de proceso en el cual se produce un tipo de tela, la materia prima
+						generalmente es proporcionada por un proveedor extranjero.</p>
+				</section>
+				<section>
+					<p>Seguidamente, para cada corrida,
+						ingresan a la máquina 46 lineas de hilo por medio de unas tuberías ubicadas en la parte
+						superior. Una vez hiladas las agujas comienza el tejido, proceso que está constantemente
+						supervisado por un operario de planta. Una vez consumido el material de los 46 rollos de
+						filamento, se toma la tela obtenida y se pone en una báscula para ser pesada.</p>
+				</section>
+				<section>
+					<p>Finalmente se enrolla en un carrete y se distribuye a los diferentes clientes de la compañía</p>
+				</section>
+				<section>
+					<h2>Alltex en acción</h2>
+					<img src="./images/planta.jpeg" width="375" height="500">
+				</section>
+				<section> 
+					<h2> DESCRIPCIÓN DE DATOS </h2>
+				</section>
+				<section>
+					<p> 
+						La base de datos proporcionada por la compañía comprende 1712 observaciones
+						correspondientes a corridas industriales desde principios del mes de diciembre del año 2021.
+						Esta base de datos contiene el registro del peso de cada rollo de tela producido en la empresa.
+					</p>
+				</section>
+				<section>
+					<p>
+						Antes de iniciar el proceso de construcción de gráficos de control, es importante
+						verificar el supuesto de normalidad en la respuesta (peso de la tela en kilogramos), para
+						garantizar la correcta implementación de las herramientas de calidad.
+						Sin embargo y en este caso, luego de aplicar pruebas gráficas y formales de bondad de
+						ajuste para normalidad, se encontró que este supuesto se rechazaba con contundencia.
+						En la indagación de por qué sucedía esto, se construyó el siguiente gráfico:
+					</p>
+				</section>
+				<section data-background-iframe="../TSplotkgsplotly.html" data-background-interactive> </section>
+				<section>
+					 <h1> Objetivos </h1> 
+				</section>
+				<section>
+					<h1>Objetivo general</h1>
+				</section>
+				<section>
+					<ul>
+						<li>Analizar el proceso de manufactura en la compañía Alltex mediante herramientas estadísticas de
+							control de calidad para determinar la consistencia del sistema. </li>
+					</ul>
+				</section>
+				<section>
+					<h1>Objetivos específicos</h1>
+				</section>
+				<section>
+					<ul>
+						<li>Mostrar mediante gráficos de control la naturaleza y comportamiento del proceso de tejido en la
+							empresa, para tener un mejor panorama de los resultados obtenidos en la industria.</li>
+					</ul>
+				</section>
+				<section>
+					<ul>
+						<li>Determinar si la fase de producción de los insumos textiles en Alltex es adecuada y estable haciendo
+							uso de métodos estadísticos para caracterizar la consistencia del proceso manufacturero. </li>
+					</ul>
+				</section>
+				<section>
+					<ul>
+						<li>Pautar mediante los resultados obtenidos la referencia para un proceso adecuado de manera específica
+							en el proceso de producción en Alltex.</li>
+					</ul>
+				</section>
+				<section> 
+					<h2> Técnicas a utilizar </h2>
+					<p>
+						En el control estadístico de la calidad existen diversos métodos para controlar el estado de un proceso industrial.
+						Dicho métodos pueden ser utilizados ya sea en características tanto cualitativas como cuantitativas. 
+					</p>
+				</section>
+				<section>
+					<h2> Gráficos de control por variables y capacidad del proceso</h2>
+				</section>
+				<section>
+					<p>
+						Se establecen intervalos de confianza para la variabilidad y el promedio de una característica numérica de interés
+						basandose en "subpromedios" obtenidos en una serie de muestras de dicha característica, posteriormente se grafican
+						dichos límites y los valores promedios obtenidos en cada muestra.
+					</p>
+				</section>
+				<section>
+					<h2> Gráficos de control para cambios pequeños</h2>
+				</section>
+				<section>
+					<p> 
+						Alternativa a las gráficas de control de Shewart. Utiles en proceso donde la medida de interés es crítica para el 
+						desarrollo de una actividad en particular y por lo tanto es inadmisible desviarse del valor objetivo.
+					</p>
+				</section>
+				<section>
+					<h2> Validación de supuestos </h2>
+					<p> 
+						Las metologías a implementar se basan en el supuesto que la cracterística de interés proviene de una población
+						normal, por lo tanto es muy importante verificar el cumplimiento de dicho supuesto antes de aplicar las técnicas en
+						cuestión.
+					</p>
+				</section>
+				<section>
+					<div class="supuestos">
+						<div class="filas"> <img src="./images/Normalidad.png" width="50%"> </div>
+						<div class="filas"> <img src="./images/distribucion_kgs.png" width="50%"> </div>
+					</div>
+				</section>
+			</section>
+			<section>
+				<h1>Gráficas de control Shewart</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Rango móvil</h2>
+					<p> Como se está trabajando con medidas individuales se utiliza el rango móvil para estimar la
+						medida de dispersión. Para estos tipos de análisis se inicia verificando el estado de la medida
+						de variabilidad y posteriormente se sigue con la medida individual, para este caso particular,
+						la masa en Kg de la tela tejida.
+					</p>
+				</section>
+				<section>
+					<h2>Gráfico de control inicial para los rangos móviles</h2>
+				</section>
+				<section data-background-iframe="../MR1.html" data-background-interactive></section>
+				<section>
+					<p> Se puede apreciar que existen 4 puntos que se encuentran por fuera de los límites de control,
+						por lo que se hace necesario eliminarlos y suponer que estos son debidos a causas asignables.
+					</p>
+				</section>
+				<section>
+					<h2>Luego de la primera depuración</h2>
+				</section>
+				<section data-background-iframe="../MR2.html" data-background-interactive></section>
+				<section>
+					<p> Luego de recalcular los límites de control, siguen existiendo rollos de tela con un masa
+						ligeramente mayor al del nuevo límite de control superior por lo que se deben recalcular
+						nuevamente.
+					</p>
+				</section>
+				<section>
+					<h2>Resultado final</h2>
+				</section>
+				<section data-background-iframe="../MR3.html" data-background-interactive></section>
+				<section>
+					<p>
+						Luego de recalcular los límites por segunda vez se obtiene un control estadístico para la medida
+						de
+						variabilidad y se puede continuar con el análisis para el masa en Kg de la tela tejida.
+					</p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Medidas individuales</h2>
+					<p>
+						Al llegar a un estado de control estadístico para la estimación de la medida de dispersión del proceso,
+						se sigue el siguiente paso: la estimación de los límites de control para la masa en Kg de tela tejida.
+						Este orden se debe a que los límites de control de las medidas individuales dependen de la medida de variabilidad.
+					</p>
+				</section>
+				<section>
+					<h2>Primer gráfico de control para la masa de los rollos</h2>
+				</section>
+				<section data-background-iframe="../firstshewart.html" data-background-interactive></section>
+				<section>
+					<p> Inicialmente se detectan 9 puntos ligeramente fuera de los límites de control tanto
+						por encima como por debajo, lo que hace necesario recalcularlos ignorando aquellos rollos que obtuvieron
+						Kg de peso no deseado.
+					</p>
+				</section>
+				<section>
+					<h2>Resultado final</h2>
+				</section>
+				<section data-background-iframe="../finalshewart.html" data-background-interactive></section>
+				<section>
+					<p>
+						Luego de eliminar las observaciones problematicas (las cuales se asume que son debidas a causas asignables) 
+						se llega a un proceso en control estadístico. Si bien en el primer tramo se apreciar tendencia lineal dentro de
+						los límites, los análisis de patrones sitemáticos carecen de sentido debido a la forma en que se estima la medida 
+						de variabilidad.
+					</p>
+				</section>
+				<section>
+					<h2>Resumen del proceso</h2>
+					<h3>Parámetros estimados</h3>
+					\[
+					\begin{cases}
+					\begin{aligned}
+						\hat{\mu} &amp; = 20.279 \\
+						\hat{\sigma} &amp; = 0.0877
+					\end{aligned}
+					\end{cases}
+					\]
+					<h3>Límites de control</h3>
+					\[
+					\begin{cases}
+					\begin{aligned}
+						\text{UCL} &amp; = 20.5422 \\
+						\text{LCL} &amp; = 20.0158
+					\end{aligned}
+					\end{cases}
+					\] 
+				  </section>
+				<section>
+					<h2>Capacidad del proceso</h2>
+					\[
+					\begin{aligned}
+						\hat{C}_{pm} &amp; = \frac{\hat{C}_p}{\sqrt{1 + \hat{\varepsilon}^2}} \\
+						&amp; = 2.1025
+					\end{aligned}
+					\] 
+				  </section>
+				<section>
+					<h2> Curva OC</h2>
+				</section>
+				<section data-background-iframe="../OC.html" data-background-interactive></section>
+				<section>
+					<p>
+						El proceso no es muy bueno al momento de detectar cambios en la media del proceso. Debe ocurrir un desplazamiento de
+						al menos 2.5 desviaciones estándar para que la probabilidad de no detectar el desplazamiento de media sea menor a 0.5.
+						Si se quiere un valor pequeño de dicha probabilidad, la magnitud del desplazamiento debe ser incluso mayor (4 o 5 
+						desviaciones estándar).
+					</p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Fase II</h2>
+					<p>
+						Para verificar el comportamiento del proceso en la fase II, se usan las 76 ultimas mediciones obervadas del 
+						proceso y se conservan los mismos límites de control obtenidos en la fase I.
+					</p>
+				</section>
+				<section data-background-iframe="../FaseII.html" data-background-interactive></section>
+				<section>
+					<p>
+						Existen 9 rollos con una producción de tela (Kg) menor a la esperada respecto al límite de control inferior.
+	
+					</p>
+				</section>
+				<section>
+					<h2>Incluyendo los límites de especificación</h2>
+				</section>
+				<section data-background-iframe="../FaseIImelopa.html" data-background-interactive></section>
+				<section>
+					<h1>Conclusiones</h1>
+				</section>
+				<section>
+					<ul>
+						<li>Claramente se puede ver que el proceso realmente no se lleva adecuadamente según lo establecido
+							en los límites de control, pues hay más mediciones fuera de control de las que se esperan ya que el
+							se espera una señal fuera en promedio control cada 370.3704 muestras.
+						</li>
+					</ul>
+				</section>
+				<section>
+					<ul>
+						<li>La empresa debe procurar capacitar más el personal que se encarga de la manipulación y calibración
+							de la máquina para que el proceso siga en control.
+						</li>
+					</ul>
+				</section>
+				<section>
+					<ul>
+						<li>A pesar de que hay señales fuera de control, el proceso es bastante capaz y las masas de los
+							rollos de tela se encuentran muy dentro de los límites de especificación.
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<h1>Gráficos para detectar desplazamientos pequeños de la media del proceso</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Gráfico CUSUM</h2>
+					<p>
+						Aunque las gráficas tradicionales de Shewart son muy utiles para observar el estado de un proceso de producción,
+						tienen el problema de no detectar cambios muy pequeños lo cual puede ser un gran inconveniente cuando se 
+						requiera un márgen de precisión más pequeño. La gráfica CUSUM es una alternativa a esta cuestión.
+					</p>
+				</section>
+				<section data-background-iframe="../cusum.html" data-background-interactive></section>
+				<section>
+					<h1>Conclusiones</h1>
+				</section>
+				<section>
+					<ul>
+						<li>Realmente se puede apreciar que el proceso necesita seguir siendo calibrado pues se observa un 
+							desplazamiento de media notorio hacia arriba con una tendencia que aparentemente va a la alza.
+						</li>
+					</ul>
+				</section>
+				<section>
+					<ul>
+						<li>Hacer un análisis minucioso de los desplazamientos de media resulta beneficioso, ya que si bien
+							la curva OC sugiere que se logra detectar con eficacia los desplazamientos de la media a partir de
+							3 desviaciones estándar, la gráfica CUSUM detecta las desviaciones para 0.5 desviaciones estándar con rapidez.
+						</li>
+					</ul>
+				</section>
+				<section>
+					<ul>
+						<li>Resulta urgente verificar qué se está haciendo con el proceso, pues el nivel medio de la caracterísitca
+							de calidad va al alza y si bien como se vio, se está lejos del límite de especificación superior, de no
+							tomar acciones se podría llegar a tener un producto defectuoso cuando a priori no se tienen productos de esta
+							índole
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Conclusiones</h1>
+				</section>
+				<section>
+					<ul>
+						<li>En conclusión se puede decir que el proceso en primera fase se encuentra fuertemente centrado en su
+							valor objetivo y las desviaciones respecto a la media son relativamente pequeñas. Esto da cuenta de
+							un proceso adecuado, sin embargo también es importante concluír respecto a los pequeños cambios del
+							mismo.
+						</li>
+					</ul>
+				</section>
+				<section>
+					<ul>
+						<li>
+							El proceso tiene problemas para detectar desplazamiento de media pues, como se evidenció previamente, para un cambio
+							de media de 4 desviaciones estándar la probabilidad de no detectar dicho desplazamiento sigue siendo 
+							relativamente grande (aproximadamente 0.15). La gravedad de este acontecimiento se pudo evidenciar en el gráfico CUSUM.
+						</li>
+					</ul>
+				</section>
+				<section>
+					<ul>
+						<li>
+							Finalmente, a pesar de que se tiene que el proceso no está del todo en control, a priori no es preocupante
+							pues no hay registro de unidades defectuosas.
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script src="plugin/math/math.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath]
+		});
+	</script>
+</body>
+
+</html>
