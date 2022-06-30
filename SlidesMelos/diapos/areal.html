@@ -74,11 +74,11 @@
                     <h2>¡Matricialmente la vida es más sabrosa!</h2>
                     <p>Los errores se pueden expresar como</p>
 					\[
-                    \underline{e} = \mathbf{B}(\underline{Y} - \mathbf{X}^T \underline{\beta}) \underline{\varepsilon}
+                    \underline{e} = \mathbf{B}(\underline{Y} - \mathbf{X}^T \underline{\beta}) + \underline{\varepsilon}
                     \]
                     <p>Con lo que el modelo inicial se transforma en </p>
                     \[
-                    \underline{Y} = \mathbf{X}^T \underline{\beta} + (\mathbf{I_m} - \mathbf{B})^{-1} + \underline{\varepsilon}
+                    \underline{Y} = \mathbf{X}^T \underline{\beta} + (\mathbf{I_m} - \mathbf{B})^{-1} \underline{\varepsilon}
                     \]
                     y usualmente $\mathbf{B} = \lambda \mathbf{W}$
 				</section>
