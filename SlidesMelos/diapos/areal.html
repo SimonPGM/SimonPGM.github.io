@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Datos en áreas</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+	<link rel="stylesheet" href="style.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+                <h1>Modelos de datos en areas</h1>
+			</section>
+			<section>
+                <section>
+                    <h1>Enfoque estadístico usual</h1>
+                </section>
+				<section>
+					<h2>¿Modelo de regresión lineal clásico?</h2>
+					<p> Como es usual, lo primero es preguntarse por un viejo conocido, así que el cuestionamiento que surge naturalmente es <br>
+                        ¿se puede usar el modelo de regresión lineal clásico para modelar datos en áreas?
+					</p>
+				</section>
+                <section>
+                    <h1>NO</h1>
+                    <p>Bueno, no del todo.</p>
+                    <img src="https://data.whicdn.com/images/321492980/original.jpg">
+                </section>
+				<section>
+					<h1>¿Por qué?</h1>
+                    <img src="https://i.imgflip.com/1eu6mt.jpg">
+				</section>
+				<section>
+                    <h2>La respuesta es sencilla</h2>
+					<img src="https://i.imgflip.com/6lbty8.jpg" title="made at imgflip.com"/>
+				</section>
+				<section>
+					<h1>¿Cómo solucionar el problema?</h1>
+                    <p>Planteando un modelo más general</p>
+                    \[
+                    \underline{Y} = \underline{\mu} + \underline{e}
+                    \]
+                    <p>Acá la diferencia crucial con el modelo lineal es el vector de errores aleatorios.
+                        <br>
+                        !Es más flexible!
+                    </p>
+				</section>
+				<section>
+					<h1>Lidiando con la autocorrelación de los residuales</h1>
+				</section>
+				<section>
+					<h2>Modelos simultáneos autoregresivos</h2>
+                    <p>La idea clave es modelar los residuales a través de los otros, pues esto es un contexto espacial y probablemente
+                        esten correlacionados.
+                    </p>
+                    \[
+                    \begin{equation*}
+                    e_i = \sum_{j = 1}^{m} b_{ij} e_j + \varepsilon_i
+                    \end{equation*}
+                    \]
+				</section>
+				<section>
+                    <h2>¡Matricialmente la vida es más sabrosa!</h2>
+                    <p>Los errores se pueden expresar como</p>
+					\[
+                    \underline{e} = \mathbf{B}(\underline{Y} - \mathbf{X}^T \underline{\beta}) \underline{\varepsilon}
+                    \]
+                    <p>Con lo que el modelo inicial se transforma en </p>
+                    \[
+                    \underline{Y} = \mathbf{X}^T \underline{\beta} + (\mathbf{I_m} - \mathbf{B})^{-1} + \underline{\varepsilon}
+                    \]
+                    y usualmente $\mathbf{B} = \lambda \mathbf{W}$
+				</section>
+                <section>
+                    <h1>Bueno... ¿y?</h1>
+                    <img src="https://www.ajournalofmusicalthings.com/wp-content/uploads/2016/10/Hmmm1.jpg">
+                </section>
+                <section>
+                    <h2>Se está considerando una estructura de covarianzas (y por tanto correlaciones) no esféricas.</h2>
+                    <img src="https://c.tenor.com/41NgdUfl5WEAAAAC/think-meme.gif">
+                </section>
+                <section>
+                    <h1>¿Y esto soluciona completamente el problema?</h1>
+                </section>
+                <section>
+                    <p>No necesariamente, pero por lo general representa una manera más adecuada de realizar un ajuste a esta clase de datos
+                        y ofrece un panorama distinto.
+                    </p>
+                    \[
+                    \begin{equation*}
+                    \underline{Y} = \mathbf{X}^T \underline{\beta} + \lambda \mathbf{W}(\underline{Y} - \mathbf{X}^T \underline{\beta}) + \underline{\varepsilon}
+                    \end{equation*}
+                    \]
+                </section>
+                <section>
+                    <h1>Modelos condicionados autoregresivos</h1>
+                </section>
+                <section>
+                    <p>
+						La idea es condicionar la distribución de los errores usando al resto, sin embargo para no introducir ruido solo se
+                        consideran los vecinos espaciales según el criterio que se haya establecido. 
+					</p>
+                    \[
+                    \begin{equation*}
+                    e_i | e_{j \sim i} \sim N\left(\sum_{j \sim i} \frac{c_{ij} e_j}{\sum_{j \sim i} c_{ij}}, \frac{\sigma_{e_i}^2}{\sum_{j \sim i} c_{ij}}\right)
+                    \end{equation*}
+                    \]
+                </section>
+                <section>
+                    <h1>¿Y esto es suficiente en este caso?</h1>
+                </section>
+                <section>
+                    <h1>No</h1>
+                    <p>Condicionar la distribución de los residuales no es suficiente, por lo que algunas restricciones deben ser impuestas
+                        sobre los parámetros de los modelos.
+                    </p>
+                </section>
+			</section>
+            <section>
+                <section>
+                    <h1>¿Hay más?</h1>
+                </section>
+                <section>
+                    <h1>Modelos econométricos</h1>
+                    <p>La econometría espacial se encarga de revisar el supuesto de homocedasticidad y mediante las herramientas desarrolladas
+                        dentro de su teoría busca obtener un modelo adecuado mediante el ajuste de los errores estándar de los coeficientes de 
+                        regresión.
+                    </p>
+                    <h3>Pero eso es algo que se sale de la metodología tratada en el curso.</h3>
+                </section>
+                <section>
+                    <h1>Extensiones a otros modelos estadísticos</h1>
+                    <ul>
+                        <li>GAM.</li>
+                        <li>GLM.</li>
+                        <li>GLMM.</li>
+                        <li>Modelos jerárquicos bayesianos.</li>
+                    </ul>
+                </section>
+            </section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script src="plugin/math/math.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath]
+		});
+	</script>
+</body>
+
+</html>
